@@ -11,7 +11,7 @@ We got this CSV or Excel file and we want to insert in the Fruits table:
 | Bananas      | 1.89      | 5234       |
 | Apples       | 1.79      | 524        |
 | Orange       | 1.69      | 34         |
-      ...           ...          ...
+|     ...      |    ...    |     ...    |
 
 In the website you choose the INSERT option and returns X inserts of X rows of data that you have in the file:
 ```
