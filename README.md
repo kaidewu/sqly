@@ -1,5 +1,5 @@
-# SQL GENERATOR
-Webiste build with Reflex that generate a SQL Query from reading a CSV or Excel File
+# SQLY
+Webiste build with Reflex containing useful tools for SQL Server.
 
 You got a CSV or Excel file with some data that you wanna insert/update/delete from your database. The webisite build in [Reflex](https://reflex.dev) read you CSV or Excel file and depends on you selection, generate the SQL Query to insert in the database.
 
