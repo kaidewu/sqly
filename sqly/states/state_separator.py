@@ -12,20 +12,22 @@ class Separator(rx.State):
         :params form_data: Dict[str, str]
         :description Tranform into a list depends on the actions it's given
         """
-        promt_text: List[str] = form_data["prompt_text"].splitlines()
+        promt_text: List[str] = form_data["prompt_text"]
         actions: str = form_data["actions"]
         temp_var: list = []
         self.results_finish = False
         self.results_processing = True
         yield
         try:
+            if promt_text is None:
+                raise Exception("Prompt can not be empty!!")
+            else:
+                promt_text.splitlines()
             if actions == "simple_commas":
-                for text in promt_text:
-                    temp_var.append(f"'{text}'")
+                temp_var.extend(f"'{text}'" for text in promt_text)
                 self.results = ", ".join(text for text in temp_var)
             elif actions == "double_commas":
-                for text in promt_text:
-                    temp_var.append(f"\"{text}\"")
+                temp_var.extend(f"\"{text}\"" for text in promt_text)
                 self.results = ", ".join(text for text in temp_var)
             elif actions == "none":
                 self.results = ", ".join(text for text in promt_text)
@@ -34,6 +36,5 @@ class Separator(rx.State):
             self.results_processing = False
             self.results_finish = True
         except Exception as err:
-            print(err)
             self.results_processing = False
             yield rx.window_alert(f"Error in the processing: {err}")
