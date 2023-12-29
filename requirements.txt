@@ -1,3 +1,1 @@
-reflex
-python-dotenv
-pandas
+reflex==0.3.7
