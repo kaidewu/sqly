@@ -1,4 +1,5 @@
 import reflex as rx
+import time
 from typing import Dict, List
 
 class Separator(rx.State):
@@ -7,11 +8,13 @@ class Separator(rx.State):
     results_processing: bool = False
     results_finish: bool = False
 
-    def get_results(self, form_data: Dict[str, str]) -> str:
+    def get_results(self, form_data: Dict[str, str]):
         """
-        :params form_data: Dict[str, str]
-        :description Tranform into a list depends on the actions it's given
+        Get results
+        :params = form_data: Dict[str, str]
+        :description = Tranform into a list depends on the actions it's given
         """
+        start_time: float = time.perf_counter()
         if form_data["prompt_text"] is not None:
             promt_text: List[str] = form_data["prompt_text"].splitlines()
         else:
@@ -34,6 +37,7 @@ class Separator(rx.State):
                 raise Exception("Internal Error!")
             self.results_processing = False
             self.results_finish = True
+            print(time.perf_counter() - start_time)
         except Exception as err:
             self.results_processing = False
             yield rx.window_alert(f"Error in the processing: {err}")
