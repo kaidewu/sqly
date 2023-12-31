@@ -7,6 +7,5 @@ def main(*args) -> rx.Component:
         navbar(),
         rx.container(
             *args
-        ),
-        as_="main"
+        )
     )

@@ -2,21 +2,18 @@ import reflex as rx
 
 def navbar() -> rx.Component:
     return(
-        rx.box(
-            rx.container(
-                rx.box(
-                    rx.color_mode_button(
-                        rx.color_mode_icon(),
-                    ),
-                    style={
-                        "display": "inline-block",
-                    }
+        rx.container(
+            rx.box(
+                rx.color_mode_button(
+                    rx.color_mode_icon(),
                 ),
-                display="flex",
-                wrap="wrap",
-                align="center",
-                justify="space-between"
+                style={
+                    "display": "inline-block",
+                }
             ),
-            position="fixed"
+            display="flex",
+            wrap="wrap",
+            align="center",
+            justify="space-between"
         )
     )
