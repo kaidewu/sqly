@@ -1,17 +1,10 @@
 import reflex as rx
 from typing import List, Dict
 from random import randrange
+import math
 
 class DataGenerator(rx.State):
     """ Data Generator like names, surnames, identification numbers, phone numbers, ... """
-    
-    def get_identification_number(self, start: int, end: int) -> int:
-        """
-        Get identification number
-        :params = start: int, end: int
-        :description = Get random numbers for identification
-        """
-        return randrange(start, end)
     
     def identification_generator(self) -> Dict[str, str]:
         """
@@ -23,12 +16,12 @@ class DataGenerator(rx.State):
                                        "F", "P", "D", "X", "B", "N", "J", 
                                        "Z", "S", "Q", "V", "H", "L", "C", 
                                        "K", "E"]
-        dni_numbers: int = self.get_identification_number(0, 99_999_999)
-        remainder: int = dni_numbers % 23
         try:
-            while 0 < remainder > 22:
-                dni_numbers = self.get_identification_number(0, 99_999_999)
+            while True:
+                dni_numbers = randrange(0, 99_999_999)
                 remainder = dni_numbers % 23
+                if (0 < remainder < 23) and (int(math.log10(dni_numbers)) + 1) == 8:
+                    break
             return {
                 "dni": f"{dni_numbers}{equivalency_list[remainder]}",
                 "passport": "Comming soon..."
