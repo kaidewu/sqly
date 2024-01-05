@@ -18,20 +18,18 @@ class Separator(rx.State):
         else:
             promt_text = ""
         actions: str = form_data["actions"]
-        temp_var: list = []
         self.is_finished = False
         self.is_processing = True
         yield
         try:
             if actions == "simple_commas":
-                temp_var.extend(f"'{text}'" for text in promt_text)
+                self.promt_results = ", ".join(f"'{text}'" for text in promt_text)
             elif actions == "double_commas":
-                temp_var.extend(f"\"{text}\"" for text in promt_text)
+                self.promt_results = ", ".join(f"\"{text}\"" for text in promt_text)
             elif actions == "none":
-                temp_var.extend(f"{text}" for text in promt_text)
+                self.promt_results = ", ".join(f"{text}" for text in promt_text)
             else:
                 raise Exception("Internal Error!")
-            self.promt_results = ", ".join(text for text in temp_var)
         except Exception as err:
             self.is_processing = False
             yield rx.window_alert(f"Error in the processing: {err}")

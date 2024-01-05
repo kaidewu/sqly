@@ -2,7 +2,7 @@ import reflex as rx
 
 def navbar() -> rx.Component:
     return(
-        rx.container(
+        rx.box(
             rx.box(
                 rx.color_mode_button(
                     rx.color_mode_icon(),
