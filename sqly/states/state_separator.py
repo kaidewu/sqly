@@ -1,4 +1,5 @@
 import reflex as rx
+from traceback import format_exc as traceback_error
 from typing import Dict, List
 
 class Separator(rx.State):
@@ -18,7 +19,6 @@ class Separator(rx.State):
         else:
             promt_text = ""
         actions: str = form_data["actions"]
-        self.is_finished = False
         self.is_processing = True
         yield
         try:
@@ -30,9 +30,9 @@ class Separator(rx.State):
                 self.promt_results = ", ".join(f"{text}" for text in promt_text)
             else:
                 raise Exception("Internal Error!")
-        except Exception as err:
+        except:
             self.is_processing = False
-            yield rx.window_alert(f"Error in the processing: {err}")
+            yield rx.window_alert(f"Error in the processing:\n{traceback_error}")
         finally:
             self.is_processing = False
             self.is_finished = True
